@@ -18,6 +18,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarSeparator,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 
@@ -29,6 +30,8 @@ const nav = [
 ];
 
 export function AppSidebar() {
+  const { isMobile, setOpenMobile } = useSidebar();
+
   return (
     <Sidebar
       collapsible="icon"
@@ -75,6 +78,9 @@ export function AppSidebar() {
                     <NavLink
                       to={item.to}
                       end={item.end as any}
+                      onClick={() => {
+                        if (isMobile) setOpenMobile(false);
+                      }}
                       className={({ isActive }) =>
                         cn(
                           "rounded-xl",
@@ -103,6 +109,9 @@ export function AppSidebar() {
                 <SidebarMenuButton asChild tooltip="Configurações">
                   <NavLink
                     to="/configuracoes"
+                    onClick={() => {
+                      if (isMobile) setOpenMobile(false);
+                    }}
                     className={({ isActive }) =>
                       cn(
                         "rounded-xl",
